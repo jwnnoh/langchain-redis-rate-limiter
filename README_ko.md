@@ -13,8 +13,14 @@ LangChain의 `BaseRateLimiter`와 호환되는 Redis 기반 RateLimiter입니다
 
 ## 설치
 
+`pip` 또는 `uv`를 사용하여 설치할 수 있습니다.
+
 ```bash
 pip install langchain-redis-rate-limiter
+```
+
+```bash
+uv pip install langchain-redis-rate-limiter
 ```
 
 ## 사용법
