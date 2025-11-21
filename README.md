@@ -2,18 +2,19 @@
 
 [English](README.md) | [한국어](README_ko.md)
 
-A Redis-based RateLimiter for LangChain, compatible with `BaseRateLimiter`. It supports **both Requests Per Minute (RPM) and Requests Per Second (RPS)** limiting, designed to work seamlessly in distributed environments.
+A Redis-based RateLimiter for LangChain, compatible with `BaseRateLimiter`.
+It supports **both Requests Per Minute (RPM) and Requests Per Second (RPS)** limiting, designed to work seamlessly in distributed environments.
 
 ## Features
 
 - **Redis Support**: Compatible with Local Redis, AWS ElastiCache.
 - **LangChain Integration**: Inherits from `BaseRateLimiter`, allowing direct usage with LangChain models.
-- **Async Support**: Supports both sync and async request.
+- **Async Support**: Supports both sync and async requests.
 - **Distributed Support**: Uses Redis to manage shared status across multiple servers or processes.
 
 ## Installation
 
-You can install using `pip` or `uv` package manager.
+You can install using the `pip` or `uv` package manager.
 
 ```bash
 pip install langchain-redis-rate-limiter
@@ -64,7 +65,7 @@ limiter = RedisRateLimiter(
 
 - `redis_url`: Redis connection URL (e.g., redis://localhost:6379).
 - `key_prefix`: Prefix for Redis keys (default: langchain_limiter). Use different prefixes for different limit rules.
-- `requests_per_second`: The maximum number of requests allowed per second. For example, setting this to 5 means you can make up to five requests each second.
+- `requests_per_second`: The maximum number of requests allowed per second. For example, setting this to 5 means you can make up to five requests each second. To configure Requests Per Minute (RPM), simply divide your desired RPM by 60 (e.g., setting this to `0.5` equals 30 RPM).
 - `check_every_n_seconds`: When the limit is reached and a request needs to wait, this value determines how often the system checks again to see whether a new request is allowed. Example: 0.1 checks every 0.1 seconds.
 - `max_bucket_size`: Controls how many requests can be handled in a short burst. A larger value allows brief spikes in traffic before the limiter slows things down.
 
