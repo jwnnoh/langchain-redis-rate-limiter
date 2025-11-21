@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "langchain-redis-rate-limiter"
+version = "0.1.0"
+description = "Redis-based distributed RateLimiter for LangChain with RPM/RPS support"
+readme = "README.md"
+requires-python = ">=3.8"
+
+authors = [
+  {name = "Jeongwan Noh", email = "jwnnoh@gmail.com"},
+]
+
+license = "Apache-2.0"
+license-files = ["LICENSE*"]
+
+keywords = [
+  "langchain",
+  "redis",
+  "langchain-rate-limiter",
+  "redis-rate-limiter",
+  "redis-limiter",
+  "rate-limiter",
+  "rate-limit",
+  "distributed-rate-limiter",
+]
+
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+
+dependencies = [
+    "langchain-core",
+    "redis>=4.2.0",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/jwnnoh/langchain-redis-rate-limiter"
+"Bug Tracker" = "https://github.com/jwnnoh/langchain-redis-rate-limiter/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
