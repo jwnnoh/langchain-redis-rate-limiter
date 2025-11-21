@@ -43,13 +43,24 @@ model = ChatOpenAI(
 model.invoke("Hello world")
 ```
 
+### TLS/SSL 연결 시
+
+AWS ElastiCache와 같은 관리형 Redis 서비스에서 **Encryption in Transit(전송 중 암호화)**가 활성화된 경우, `redis://` 대신 `rediss://`를 통해 url을 구성해주어야 합니다.
+
+```
+limiter = RedisRateLimiter(
+    redis_url="rediss://master.example-cache.amazonaws.com:6379",
+    ...
+)
+```
+
 ### 매개변수
 
-- redis_url: Redis 연결 URL (예: redis://localhost:6379)
-- key_prefix: Redis 키 접두사 (기본값: langchain_limiter). 여러 모델에 다른 제한을 걸고 싶다면 이 값을 다르게 설정하세요.
-- requests_per_second: 1초 동안 몇 번까지 요청을 보낼 수 있는지 설정합니다. 예: 5라면 초당 최대 5번까지 호출 가능합니다.
-- check_every_n_seconds: 요청이 너무 많아 잠시 대기해야 할 때, "다시 요청을 다시 보내도 되는지" 확인하는 간격입니다. 예: 0.1이면 0.1초마다 다시 확인합니다.
-- max_bucket_size: 짧은 순간에 얼마나 많은 요청 폭주를 허용할지 결정하는 값입니다. 값이 클수록 짧은 시간 동안 더 많은 요청을 보낼 수 있습니다.
+- `redis_url`: Redis 연결 URL (예: redis://localhost:6379)
+- `key_prefix`: Redis 키 접두사 (기본값: langchain_limiter). 여러 모델에 다른 제한을 걸고 싶다면 이 값을 다르게 설정하세요.
+- `requests_per_second`: 1초 동안 몇 번까지 요청을 보낼 수 있는지 설정합니다. 예: 5라면 초당 최대 5번까지 호출 가능합니다.
+- `check_every_n_seconds`: 요청이 너무 많아 잠시 대기해야 할 때, "다시 요청을 다시 보내도 되는지" 확인하는 간격입니다. 예: 0.1이면 0.1초마다 다시 확인합니다.
+- `max_bucket_size`: 짧은 순간에 얼마나 많은 요청 폭주를 허용할지 결정하는 값입니다. 값이 클수록 짧은 시간 동안 더 많은 요청을 보낼 수 있습니다.
 
 ## 라이선스
 

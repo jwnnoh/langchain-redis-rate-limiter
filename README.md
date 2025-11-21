@@ -43,13 +43,24 @@ model = ChatOpenAI(
 model.invoke("Hello world")
 ```
 
+### TLS/SSL Connection (AWS ElastiCache, etc.)
+
+If Encryption in Transit is enabled on AWS ElastiCache, Valkey, or other managed Redis services, you must use the `rediss://` scheme instead of `redis://`.
+
+```
+limiter = RedisRateLimiter(
+    redis_url="rediss://master.example-cache.amazonaws.com:6379",
+    ...
+)
+```
+
 ## Parameters
 
-- redis_url: Redis connection URL (e.g., redis://localhost:6379).
-- key_prefix: Prefix for Redis keys (default: langchain_limiter). Use different prefixes for different limit rules.
-- requests_per_second: The maximum number of requests allowed per second. For example, setting this to 5 means you can make up to five requests each second.
-- check_every_n_seconds: When the limit is reached and a request needs to wait, this value determines how often the system checks again to see whether a new request is allowed. Example: 0.1 checks every 0.1 seconds.
-- max_bucket_size: Controls how many requests can be handled in a short burst. A larger value allows brief spikes in traffic before the limiter slows things down.
+- `redis_url`: Redis connection URL (e.g., redis://localhost:6379).
+- `key_prefix`: Prefix for Redis keys (default: langchain_limiter). Use different prefixes for different limit rules.
+- `requests_per_second`: The maximum number of requests allowed per second. For example, setting this to 5 means you can make up to five requests each second.
+- `check_every_n_seconds`: When the limit is reached and a request needs to wait, this value determines how often the system checks again to see whether a new request is allowed. Example: 0.1 checks every 0.1 seconds.
+- `max_bucket_size`: Controls how many requests can be handled in a short burst. A larger value allows brief spikes in traffic before the limiter slows things down.
 
 ## License
 
